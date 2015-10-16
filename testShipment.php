@@ -78,8 +78,8 @@ try{
     ]);
 
     $shipment->addParcel([
-        'weight' => 5000, // In gram
-        'height' => 20, // In centimeters
+        'weight' => 5000,
+        'height' => 20,
         'width' => 30,
         'length' => 20
     ]);
