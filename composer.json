@@ -1,5 +1,5 @@
 {
-    "name": "mcs/DPD",
+    "name": "mcs/dpd",
     "description": "Library to interface with the DPD web services",
     "license": "MIT",
     "keywords": ["dpd", "dpd webservice", "dpd api", "dpd soap"],
