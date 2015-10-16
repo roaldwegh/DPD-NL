@@ -9,7 +9,10 @@
             "email": "meertensmichiel28@gmail.com"
         }
     ],
-    "require": {},
+    "require": {
+        "php": ">= 5.4",
+        "ext-soap": "*"
+    },
     "require-dev": {},
     "autoload": {
         "psr-4": {
