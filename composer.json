@@ -1,0 +1,19 @@
+{
+    "name": "mcs/DPD",
+    "description": "Library to interface with the DPD web services",
+    "license": "MIT",
+    "keywords": ["dpd", "dpd webservice", "dpd api", "dpd soap"],
+    "authors": [
+        {
+            "name": "Michiel Meertens",
+            "email": "meertensmichiel28@gmail.com"
+        }
+    ],
+    "require": {},
+    "require-dev": {},
+    "autoload": {
+        "psr-4": {
+            "MCS\\": "src"
+        }
+    }
+}
