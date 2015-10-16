@@ -1,9 +1,9 @@
 # DPD Webservice
 [![Latest Stable Version](https://poser.pugx.org/mcs/dpd/v/stable)](https://packagist.org/packages/mcs/dpd) [![Total Downloads](https://poser.pugx.org/mcs/dpd/downloads)](https://packagist.org/packages/mcs/dpd) [![Latest Unstable Version](https://poser.pugx.org/mcs/dpd/v/unstable)](https://packagist.org/packages/mcs/dpd) [![License](https://poser.pugx.org/mcs/dpd/license)](https://packagist.org/packages/mcs/dpd)
 
-Installation
+Installation:
 ```bash
-composer require mcs/dpd
+$ composer require mcs/dpd
 ```
 
 Features:
