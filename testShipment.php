@@ -1,22 +1,29 @@
-<?php
+<?php 
 
-	require_once 'vendor/autoload.php';
-	
+require_once 'vendor/autoload.php';
+    
 use MCS\DPDAuthorisation;
 use MCS\DPDShipment;
-	
+
 try{
-    // Authorize
+    
+    // Second parameter to disable the wsdl cache defaults to true
     $authorisation = new DPDAuthorisation([
         'staging' => true,
-        'delisId' => '<delisId>',
-        'password' => '<password>',
+        'delisId' => '...',
+        'password' => '...',
         'messageLanguage' => 'en_EN',
-        'customerNumber' => '<customerNumber>'
+        'customerNumber' => '...'
     ]);
-
+    
+    // Second parameter to disable the wsdl cache defaults to true
+    // $authorisation = new DPDAuthorisation($dpd, false);
+    
     // Init the shipment with authorisation
     $shipment = new DPDShipment($authorisation);
+    
+    // Second parameter to disable the wsdl cache defaults to true
+    // $shipment = new DPDShipment($authorisation, false);
 
     // Set the language for the track&trace link
     $shipment->setTrackingLanguage('nl_NL');
@@ -96,8 +103,7 @@ try{
 
 
 }catch(Exception $e){
-    echo $e->getMessage();		
+    dump($e->getMessage());		
 }
-
 
 

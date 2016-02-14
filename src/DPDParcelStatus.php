@@ -17,12 +17,12 @@ class DPDParcelStatus{
     /**
      * @param object DPDAuthorisation $authorisationObject
      */
-    public function __construct(DPDAuthorisation $authorisationObject)
+    public function __construct(DPDAuthorisation $authorisationObject, $wsdlCache = true)
     {
         $this->authorisation = $authorisationObject->authorisation;
         $this->environment = [
-            'wsdlCache' => ( $this->authorisation['staging'] ? false : true ),
-            'parcelStatusWsdl'  => ( $this->authorisation['staging'] ? self::TEST_PARCELSTATUS_WSDL : self::PARCELSTATUS_WSDL),
+            'wsdlCache' => $wsdlCache,
+            'parcelStatusWsdl' => ($this->authorisation['staging'] ? self::TEST_PARCELSTATUS_WSDL : self::PARCELSTATUS_WSDL),
         ];   
     }
 
@@ -34,21 +34,21 @@ class DPDParcelStatus{
     public function getStatus($awb)
     {
 
+        if ($this->environment['wsdlCache']){
+            $soapParams = [
+                'cache_wsdl' => WSDL_CACHE_BOTH
+            ];
+        }
+        else{
+            $soapParams = [
+                'cache_wsdl' => WSDL_CACHE_NONE,
+                'exceptions' => true
+            ];
+        }
+        
         try{
-
-            if ($this->environment['wsdlCache']){
-                $client = new Soapclient($this->environment['parcelStatusWsdl'], [
-                    'cache_wsdl' => WSDL_CACHE_BOTH,
-                    'exceptions' => true,
-                    'trace' => 1
-                ]);    
-            }else{
-                $client = new Soapclient($this->environment['parcelStatusWsdl'], [
-                    'exceptions' => true,
-                    'trace' => true
-                ]);    
-            }
-
+            
+            $client = new Soapclient($this->environment['parcelStatusWsdl'], $soapParams);
             $header = new SOAPHeader(self::SOAPHEADER_URL, 'authentication', $this->authorisation['token']);
             $client->__setSoapHeaders($header);
             $response = $client->getTrackingData(['parcelLabelNumber' => $awb]);

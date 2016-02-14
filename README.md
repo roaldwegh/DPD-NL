@@ -17,15 +17,18 @@ use MCS\DPDAuthorisation;
 use MCS\DPDShipment;
 	
 try{
-    // Authorize
+    // Second parameter to disable the wsdl cache defaults to true
     $authorisation = new DPDAuthorisation([
         'staging' => true,
-        'delisId' => '<delisId>',
-        'password' => '<password>',
+        'delisId' => '...',
+        'password' => '...',
         'messageLanguage' => 'en_EN',
-        'customerNumber' => '<customerNumber>'
+        'customerNumber' => '...'
     ]);
-
+    
+    // Second parameter to disable the wsdl cache defaults to true
+    // $authorisation = new DPDAuthorisation($dpd, false);
+    
     // Init the shipment with authorisation
     $shipment = new DPDShipment($authorisation);
 

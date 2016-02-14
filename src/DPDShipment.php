@@ -82,14 +82,15 @@ class DPDShipment{
     const TRACKING_URL = 'https://tracking.dpd.de/parcelstatus?locale=:lang&query=:awb';
 
     /**
-     * @param object DPDAuthorisation $authorisationObject
+     * @param object  DPDAuthorisation    $authorisationObject 
+     * @param boolean [$wsdlCache         = true]
      */
-    public function __construct(DPDAuthorisation $authorisationObject)
+    public function __construct(DPDAuthorisation $authorisationObject, $wsdlCache = true)
     {
         $this->authorisation = $authorisationObject->authorisation;
         $this->environment = [
-            'wsdlCache' => ( $this->authorisation['staging'] ? false : true ),
-            'shipWsdl'  => ( $this->authorisation['staging'] ? self::TEST_SHIP_WSDL : self::SHIP_WSDL),
+            'wsdlCache' => $wsdlCache,
+            'shipWsdl'  => ($this->authorisation['staging'] ? self::TEST_SHIP_WSDL : self::SHIP_WSDL),
         ];   
         $this->storeOrderMessage['order']['generalShipmentData']['sendingDepot'] = $this->authorisation['token']->depot;
     }
@@ -129,20 +130,22 @@ class DPDShipment{
         if (count($this->storeOrderMessage['order']['parcels']) === 0){
             throw new Exception('Create at least 1 parcel');     
         }
+        
+        if ($this->environment['wsdlCache']){
+            $soapParams = [
+                'cache_wsdl' => WSDL_CACHE_BOTH
+            ];
+        }
+        else{
+            $soapParams = [
+                'cache_wsdl' => WSDL_CACHE_NONE,
+                'exceptions' => true
+            ];
+        }
+        
         try{
 
-            if ($this->environment['wsdlCache']){
-                $client = new Soapclient($this->environment['shipWsdl'], [
-                    'cache_wsdl' => WSDL_CACHE_BOTH,
-                    'exceptions' => true
-                ]);    
-            } else {
-                $client = new Soapclient($this->environment['shipWsdl'], [
-                    'exceptions' => true,
-                    'trace' => true
-                ]);    
-            }
-
+            $client = new Soapclient($this->environment['shipWsdl'], $soapParams);
             $header = new SOAPHeader(self::SOAPHEADER_URL, 'authentication', $this->authorisation['token']);
             $client->__setSoapHeaders($header);
             $response = $client->storeOrders($this->storeOrderMessage);
