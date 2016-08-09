@@ -16,7 +16,7 @@ class DPDAuthorisation{
         'token' => null
     ];
 
-    const TEST_LOGIN_WSDL = 'https://public-ws-stage.dpd.com/services/LoginService/V2_0/?wsdl';
+    const TEST_LOGIN_WSDL = 'https://public-dis-stage.dpd.nl/Services/LoginService.svc?singlewsdl';
     const LOGIN_WSDL = 'https://public-ws.dpd.com/services/LoginService/V2_0?wsdl';
 
     /**
