@@ -17,7 +17,7 @@ class DPDAuthorisation{
     ];
 
     const TEST_LOGIN_WSDL = 'https://public-dis-stage.dpd.nl/Services/LoginService.svc?singlewsdl';
-    const LOGIN_WSDL = 'https://public-ws.dpd.com/services/LoginService/V2_0?wsdl';
+    const LOGIN_WSDL = 'https://public-dis.dpd.nl/Services/LoginService.svc?singlewsdl';
 
     /**
      * Get an authorisationtoken from the DPD webservice
