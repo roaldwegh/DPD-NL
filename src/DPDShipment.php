@@ -77,7 +77,7 @@ class DPDShipment{
     protected $airWayBills = [];
 
     const TEST_SHIP_WSDL = 'https://public-dis-stage.dpd.nl/Services/ShipmentService.svc?singlewsdl';
-    const SHIP_WSDL = 'https://public-ws.dpd.com/services/ShipmentService/V3_1?wsdl';
+    const SHIP_WSDL = 'https://public-dis.dpd.nl/Services/ShipmentService.svc?singlewsdl';
     const SOAPHEADER_URL = 'http://dpd.com/common/service/types/Authentication/2.0';
     const TRACKING_URL = 'https://tracking.dpd.de/parcelstatus?locale=:lang&query=:awb';
 
