@@ -294,6 +294,19 @@ class DPDShipment{
     }
     
     /**
+     * Set the parcelshop data
+     * @param array $array
+     */
+    public function setParcelShopDelivery($parcelShopData)
+    {
+        $this->storeOrderMessage['order']['productAndServiceData']['personalDelivery'] = [
+            'type' => 3, // personal delivery without personal identification at drop point
+        ];
+
+        $this->storeOrderMessage['order']['productAndServiceData']['parcelShopDelivery'] = $parcelShopData;
+    }
+    
+    /**
      * Get's the shipment label pdf as a string
      * @return string
      */
